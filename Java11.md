@@ -133,7 +133,7 @@ String[] strings = list.toArray(String[]::new);
 * takeWhile로 전달된 predicate를 만족하는 동안만 순회를 진행한다. 전달된 predicate를 만족하지 못하는 경우 순회를 중단하고, 스트림은 종료된다.
 ### ```Stream<T> dropWhile(Predicate<? super T> predicate)```
 * 자바 9에서 추가됨
-* dropWhile은 takeWhile과 반대로, predicate를 만족하는 값은 버리고 다시 순회한다. 전달된 predicate가 만족하는 순간부터 순회가 진행된다.
+* dropWhile은 takeWhile과 반대로, predicate를 만족하는 값은 버리고 다시 순회한다. 전달된 predicate가 만족하지 않는 시점부터 순회가 진행된다.
 
 악간 억지스럽기는 한데, 위 세개의 메서드를 조합해서 15 ~ 75 까지의 숫자를 출력하는 코드는 다음과 같다.
 
