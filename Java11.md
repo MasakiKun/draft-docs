@@ -53,12 +53,12 @@ for(int i = 0; i < paths.length; i++) {
     path += paths[i];
     if(i != path.length - 1) path += File.seperator;
 }
-System.out.println(path);       // c:\developer\java\jdk
+System.out.println(path);       // c:\develop\java\jdk
 
 (자바 11부터)
 Path jdkPath = Path.of("c:", "develop", "java", "jdk");
 String path = jdkPath.toString();
-System.out.println(path);       // c:\developer\java\jdk
+System.out.println(path);       // c:\develop\java\jdk
 ```
 
 ### String 클래스
