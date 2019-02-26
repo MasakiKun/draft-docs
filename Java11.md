@@ -45,6 +45,7 @@
 * 지금까지 자주 해오던, File.separator를 구분자로 하는 경로 문자열을 만드는 작업을 하는 메서드라고 보면 정확하겠다.
 * 즉, 아래 두 코드는 동일한 작업을 하는 코드라고 하겠다.
 
+```
     (자바 10 이전의 경우)
     String paths[] = {"c:", "develop", "java", "jdk"};
     String path = "";
@@ -58,6 +59,7 @@
     Path jdkPath = Path.of("c:", "develop", "java", "jdk");
     String path = jdkPath.toString();
     System.out.println(path);       // c:\developer\java\jdk
+```
 
 ### String 클래스
 #### ```IntStream codePoints()```
@@ -68,11 +70,16 @@
 * 자바 11에서 추가됨
 * 주어진 문자열이 비어있는 문자열인지 확인한다. 비어있는 문자열이란, 길이 관계 없이 화이트 스페이스 문자만으로 구성된 문자열이다.
 
+```
     String text1 = "Hello, world!";
     String text2 = "     \t\t   ";
     String text3 = "";
-    System.out.println(text1.isBlank() + "\t" + text2.isBlank() + "\t" + text3.isBlank());
-    // false     true     true
+    System.out.println(
+        text1.isBlank() + "\t" +            // false
+        text2.isBlank() + "\t" +            // true
+        text3.isBlank()                     // true
+    );
+```
 
 #### ```Stream<String> lines()```
 * 자바 11에서 추가됨
@@ -98,6 +105,7 @@
 * 기존에도 ```Collection.toArray()``` 메서드를 통해서 컬렉션을 배열로 변환할 수 있었지만, 반환 타입이 Object[] 여서 타입 안정성이 깨질 가능성이 있었다.
 * generator에 반환 타입의 생성자를 레퍼런스로 넘겨서, 정확한 타입으로 반환할 수 있다.
 
+```
     (자바 10 이전의 경우)
     List<String> list = ....blahblah...
     // Integer[] nums = (Integer[])list.toArray() 로 써도 컴파일 타임에 오류가 발생하지 않는다!!!
@@ -108,6 +116,7 @@
     // 컴파일러는 list의 타입이 List<String>인 것을 보고, String[] 이외의 타입으로는 변환할 수 없다고 추론해낸다
     // 따라서 String[]::new 이외의 생성자를 넘기면 컴파일 타임에 오류가 발생한다
     String[] strings = list.toArray(String[]::new);
+```
 
 ### Map, Set, List 등 Collection 하위 인터페이스
 #### ```static <E> List<E> copyOf(Collection<? extends E> coll)```
