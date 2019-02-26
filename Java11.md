@@ -46,19 +46,19 @@
 * 즉, 아래 두 코드는 동일한 작업을 하는 코드라고 하겠다.
 
 ```
-    (자바 10 이전의 경우)
-    String paths[] = {"c:", "develop", "java", "jdk"};
-    String path = "";
-    for(int i = 0; i < paths.length; i++) {
-        path += paths[i];
-        if(i != path.length - 1) path += File.seperator;
-    }
-    System.out.println(path);       // c:\developer\java\jdk
+(자바 10 이전의 경우)
+String paths[] = {"c:", "develop", "java", "jdk"};
+String path = "";
+for(int i = 0; i < paths.length; i++) {
+    path += paths[i];
+    if(i != path.length - 1) path += File.seperator;
+}
+System.out.println(path);       // c:\developer\java\jdk
 
-    (자바 11부터)
-    Path jdkPath = Path.of("c:", "develop", "java", "jdk");
-    String path = jdkPath.toString();
-    System.out.println(path);       // c:\developer\java\jdk
+(자바 11부터)
+Path jdkPath = Path.of("c:", "develop", "java", "jdk");
+String path = jdkPath.toString();
+System.out.println(path);       // c:\developer\java\jdk
 ```
 
 ### String 클래스
@@ -71,14 +71,14 @@
 * 주어진 문자열이 비어있는 문자열인지 확인한다. 비어있는 문자열이란, 길이 관계 없이 화이트 스페이스 문자만으로 구성된 문자열이다.
 
 ```
-    String text1 = "Hello, world!";
-    String text2 = "     \t\t   ";
-    String text3 = "";
-    System.out.println(
-        text1.isBlank() + "\t" +            // false
-        text2.isBlank() + "\t" +            // true
-        text3.isBlank()                     // true
-    );
+String text1 = "Hello, world!";
+String text2 = "     \t\t   ";
+String text3 = "";
+System.out.println(
+    text1.isBlank() + "\t" +            // false
+    text2.isBlank() + "\t" +            // true
+    text3.isBlank()                     // true
+);
 ```
 
 #### ```Stream<String> lines()```
@@ -106,16 +106,16 @@
 * generator에 반환 타입의 생성자를 레퍼런스로 넘겨서, 정확한 타입으로 반환할 수 있다.
 
 ```
-    (자바 10 이전의 경우)
-    List<String> list = ....blahblah...
-    // Integer[] nums = (Integer[])list.toArray() 로 써도 컴파일 타임에 오류가 발생하지 않는다!!!
-    String[] strings = (String[])list.toArray();
+(자바 10 이전의 경우)
+List<String> list = ....blahblah...
+// Integer[] nums = (Integer[])list.toArray() 로 써도 컴파일 타임에 오류가 발생하지 않는다!!!
+String[] strings = (String[])list.toArray();
 
-    (자바 11의 경우)
-    List<String> list = ....blahblah...
-    // 컴파일러는 list의 타입이 List<String>인 것을 보고, String[] 이외의 타입으로는 변환할 수 없다고 추론해낸다
-    // 따라서 String[]::new 이외의 생성자를 넘기면 컴파일 타임에 오류가 발생한다
-    String[] strings = list.toArray(String[]::new);
+(자바 11의 경우)
+List<String> list = ....blahblah...
+// 컴파일러는 list의 타입이 List<String>인 것을 보고, String[] 이외의 타입으로는 변환할 수 없다고 추론해낸다
+// 따라서 String[]::new 이외의 생성자를 넘기면 컴파일 타임에 오류가 발생한다
+String[] strings = list.toArray(String[]::new);
 ```
 
 ### Map, Set, List 등 Collection 하위 인터페이스
