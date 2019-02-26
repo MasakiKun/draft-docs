@@ -62,8 +62,7 @@ System.out.println(path);       // c:\developer\java\jdk
 ```
 
 ### String 클래스
-#### ```IntStream codePoints()```
-#### ```IntStream chars()```
+#### ```IntStream codePoints()``` , ```IntStream chars()```
 * 자바 9에서 추가됨
 * 문자열의 각 글자가 가리키는 유니코드 코드포인트의 순열을 IntStream 형태로 반환한다.
 #### ```boolean isBlank()```
@@ -88,9 +87,7 @@ System.out.println(
 * 자바 11에서 추가됨
 * 문자열을 n 횟수만큼 반복한 문자열을 반환한다.
 * 이 메서드도 개인적으로는 좀 아쉬운데, 구분자를 추가로 입력받아서 반복한 횟수만큼 구분자로 구분된 문자열을 반환해주는 메서드도 함께 제공되었으면 더 좋았을 거 같다.
-#### ```String strip()```
-#### ```String stripLeading()```
-#### ```String stripTrailing()```
+#### ```String strip()``` , ```String stripLeading()``` , ```String stripTrailing()```
 * 자바 11에서 추가됨
 * 각각 『문자열 앞뒤/앞/뒤 의 공백을 제거』한 문자열을 반환한다.
 * 기존의 trim() 메서드와 다른점은, API 문서에 따르면 trim() 메서드는 코드 포인트 U+0020 이하인 문자들을 공백으로 판단하여 제거한다고 한다. 
@@ -101,7 +98,7 @@ System.out.println(
 ### Collection
 #### ```<T> T[] toArray(IntFunction<T[]> generator)```
 * 자바 11에서 추가됨
-* 컬렉션의 요소들을 generator로 제공된 생성자를 통해 생성된 배열 타입의 생성자를 이용해서 변환한다.
+* 컬렉션의 요소들을 generator로 제공된 생성자 타입으로 변환한다.
 * 기존에도 ```Collection.toArray()``` 메서드를 통해서 컬렉션을 배열로 변환할 수 있었지만, 반환 타입이 Object[] 여서 타입 안정성이 깨질 가능성이 있었다.
 * generator에 반환 타입의 생성자를 레퍼런스로 넘겨서, 정확한 타입으로 반환할 수 있다.
 
@@ -122,7 +119,7 @@ String[] strings = list.toArray(String[]::new);
 #### ```static <E> List<E> copyOf(Collection<? extends E> coll)```
 * 자바 10에서 추가됨
 * 컬렉션 coll을 받아서, 이 coll이 그대로 복사된 새 변경 불가 컬렉션을 반환한다.
-* 기존의 Collections.unmodifiableXXX() 와 다른점은, 기존의 Collections.unmodifiable... 은 반환값이 변경이 불가능한 뷰였기 때문에,
-원본 컬렉션에서 데이터에 수정을 가하면 뷰의 값도 변경되었다. copyOf() 메서드로 반환된 컬렉션은 주어진 컬렉션의 복사본이기 때문에
+* 기존의 Collections.unmodifiableXXX() 와 다른점은, 기존의 Collections.unmodifiable... 은 반환값이 변경 불가 뷰였기 때문에,
+원본 컬렉션의 데이터에 수정을 가하면 뷰의 값도 변경되어 표시되었다. copyOf() 메서드로 반환된 컬렉션은 주어진 컬렉션의 복사본이기 때문에
 원본을 수정한다 하더라도, 반환된 컬렉션은 수정되지 않는다.
 
