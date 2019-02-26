@@ -123,3 +123,24 @@ String[] strings = list.toArray(String[]::new);
 원본 컬렉션의 데이터에 수정을 가하면 뷰의 값도 변경되어 표시되었다. copyOf() 메서드로 반환된 컬렉션은 주어진 컬렉션의 복사본이기 때문에
 원본을 수정한다 하더라도, 반환된 컬렉션은 수정되지 않는다.
 
+## Stream
+### ```static <T> Stream<T> iterate(T seed, Predicate<? super T> hasNext, UnaryOperater<T> next)```
+* 자바 9에서 추가됨
+* 초기값 ```seed```에서 시작해서, 단항연산 ```next```로 지정한 동작대로 값이 순차적으로 변경되는 순차 스트림을 생성한다. 이 순차 스트림은 ```hasNext```가 false일 때 종료된다.
+
+### ```Stream<T> takeWhile(Predicate<? super T> predicate)```
+* 자바 9에서 추가됨
+* takeWhile로 전달된 predicate를 만족하는 동안만 순회를 진행한다. 전달된 predicate를 만족하지 못하는 경우 순회를 중단하고, 스트림은 종료된다.
+### ```Stream<T> dropWhile(Predicate<? super T> predicate)```
+* 자바 9에서 추가됨
+* dropWhile은 takeWhile과 반대로, predicate를 만족하는 값은 버리고 다시 순회한다. 전달된 predicate가 만족하는 순간부터 순회가 진행된다.
+
+악간 억지스럽기는 한데, 위 세개의 메서드를 조합해서 15 ~ 75 까지의 숫자를 출력하는 코드는 다음과 같다.
+
+```
+// 사실은 IntStream.iterate(15, n -> n <= 75, n -> ++n) 으로도 충분하다
+IntStream.iterate(1, n -> n <= 100, n -> ++n)       // 1 ~ 100 까지의 정수 스트림
+    .takeWhile(n -> n <= 75)                        // 75 이하의 값만 취한다
+    .dropWhile(n -> n < 15)                         // 15 미만의 값은 버린다.
+    .forEach(System.out::println);
+```
