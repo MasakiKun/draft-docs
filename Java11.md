@@ -7,7 +7,7 @@
 #### ```static InputStream nullInputStream()```
 * 자바 11에서 추가됨
 * 바이트를 읽어들이지 않는 InputStream을 반환한다 (=이 스트림에서 read()를 호출하면 -1이 반환된다)
-* 이 메서드를 호출할 때 넘어오는 예외가 없으므로, 예외를 잡지 않아도 된다.
+* 이 메서드는 확인 예외를 던지지 않으므로, 예외를 잡지 않아도 된다.
 * close() 메서드는 아무런 역할을 하지 않는다.
 #### ```byte[] readAllBytes() throws IOException```
 * 자바 9에서 추가됨
@@ -23,7 +23,7 @@
 #### ```static OutputStream nullOutputStream()```
 * 자바 11에서 추가됨
 * 바이트를 출력하지 않는 OutputStream을 반환한다 (=이 스트림에서 write()를 호출해도 아무 일도 일어나지 않는다)
-* 이 메서드를 호출할 때 넘어오는 예외가 없으므로, 예외를 잡지 않아도 된다.
+* 이 메서드는 확인 예외를 던지지 않으므로, 예외를 잡지 않아도 된다.
 * close() 메서드는 아무런 일을 하지 않는다.
 ### Reader
 #### ```static Reader nullReader()```
@@ -139,6 +139,7 @@ String[] strings = list.toArray(String[]::new);
 
 ```
 // 사실은 IntStream.iterate(15, n -> n <= 75, n -> ++n) 으로도 충분하다
+
 IntStream.iterate(1, n -> n <= 100, n -> ++n)       // 1 ~ 100 까지의 정수 스트림
     .takeWhile(n -> n <= 75)                        // 75 이하의 값만 취한다
     .dropWhile(n -> n < 15)                         // 15 미만의 값은 버린다.
